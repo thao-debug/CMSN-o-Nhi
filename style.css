@@ -1,0 +1,529 @@
+
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&family=Playfair+Display:wght@400;600;700&display=swap");
+
+:root {
+    --font-body: "Nunito", "Segoe UI", Arial, sans-serif;
+    --font-heading: "Playfair Display", Georgia, serif;
+}
+
+/* =========================
+   1. CÀI ĐẶT CHUNG
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: linear-gradient(
+        135deg,
+        #fff0f3,
+        #fce4ec,
+        #fff8f0
+    );
+
+    font-family: var(--font-body);
+    color: #79545d;
+}
+
+/* =========================
+   2. NỘI DUNG CHÍNH
+========================= */
+
+.container {
+    position: relative;
+    z-index: 2;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding: 65px 20px 40px;
+    text-align: center;
+}
+
+.small-title {
+    font-family: var(--font-body);
+    font-size: 11px;
+    letter-spacing: 4px;
+    color: #bd8794;
+    margin-bottom: 18px;
+}
+
+h1 {
+    font-family: var(--font-heading);
+    font-size: 42px;
+    font-weight: normal;
+    color: #9d6473;
+    margin-bottom: 15px;
+}
+
+h1 span {
+    color: #d98a9e;
+}
+
+.description {
+    font-size: 15px;
+    color: #a67a83;
+    margin-bottom: 80px;
+}
+
+/* =========================
+   3. PHONG BÌ
+========================= */
+
+.envelope-wrapper {
+    position: relative;
+    width: 300px;
+    height: 210px;
+    perspective: 1000px;
+    z-index: 3;
+}
+
+.envelope {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.envelope-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #e9aebc;
+    border-radius: 5px;
+}
+
+/* Lá thư bên trong */
+
+.letter {
+    position: absolute;
+
+    width: 86%;
+    height: 165px;
+
+    left: 7%;
+    bottom: 24px;
+
+    padding: 8px 16px 10px;
+
+    background: #fffdf8;
+    border-radius: 5px;
+
+    box-shadow:
+        0 2px 6px rgba(123, 74, 83, 0.08),
+        0 10px 18px rgba(123, 74, 83, 0.08),
+        0 20px 30px rgba(123, 74, 83, 0.08);
+
+    z-index: 2;
+
+    transition: transform 1s ease;
+    overflow: visible;
+}
+
+.letter::before {
+    content: "";
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    width: 70px;
+    height: 18px;
+    transform: translateX(-50%) rotate(-3deg);
+    background: rgba(255, 186, 200, 0.7);
+    border-radius: 2px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.letter h2 {
+    font-size: 18px;
+    color: #a46d7b;
+    margin: 2px 0 6px;
+}
+
+.letter p {
+    font-size: 10.5px;
+    line-height: 1.35;
+    margin-bottom: 5px;
+}
+
+.flower {
+    font-size: 18px;
+    line-height: 1;
+    margin-bottom: 2px;
+}
+
+.signature {
+    font-style: italic;
+    color: #bd8291;
+    margin-top: 6px;
+    display: block;
+}
+
+/* Mặt trước phong bì */
+
+.envelope-front {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: #e9aebc;
+
+    clip-path: polygon(
+        0 100%,
+        50% 48%,
+        100% 100%
+    );
+
+    z-index: 4;
+}
+
+/* Nắp phong bì */
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background: #d98fa2;
+
+    clip-path: polygon(
+        0 0,
+        100% 0,
+        50% 55%
+    );
+
+    transform-origin: top;
+    transition: transform 0.8s ease;
+
+    z-index: 5;
+}
+
+/* Con dấu trái tim */
+
+.heart-seal {
+    position: absolute;
+    top: 95px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 32px;
+    color: #fff7f5;
+
+    z-index: 6;
+    transition: opacity 0.3s;
+}
+
+/* Trạng thái mở phong bì */
+
+.envelope.open .envelope-flap {
+    transform: rotateX(180deg);
+    z-index: 1;
+}
+
+.envelope.open .letter {
+    transform: translateY(-100px);
+    z-index: 7;
+}
+
+.envelope.open .heart-seal {
+    opacity: 0;
+}
+
+/* =========================
+   4. NÚT BẤM
+========================= */
+
+#openButton {
+    margin-top: 45px;
+
+    padding: 14px 32px;
+
+    border: none;
+    border-radius: 30px;
+
+    background: #d98fa2;
+    color: white;
+
+    font-size: 14px;
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    box-shadow: 0 5px 15px rgba(180, 110, 130, 0.2);
+
+    transition: 0.3s;
+}
+
+#openButton:hover {
+    background: #c7788e;
+    transform: translateY(-3px);
+}
+
+.footer-text {
+    margin-top: 25px;
+    font-size: 12px;
+    color: #bd929a;
+    font-style: italic;
+}
+
+/* =========================
+   5. TRANG TRÍ NỀN
+========================= */
+
+.background-decoration span {
+    position: fixed;
+    color: #e8b4c0;
+    opacity: 0.45;
+    font-size: 30px;
+    pointer-events: none;
+    animation: decorationFloat 5s ease-in-out infinite;
+}
+
+.background-decoration span:nth-child(1) {
+    top: 15%;
+    left: 10%;
+}
+
+.background-decoration span:nth-child(2) {
+    top: 35%;
+    right: 12%;
+}
+
+.background-decoration span:nth-child(3) {
+    bottom: 15%;
+    left: 15%;
+}
+
+.background-decoration span:nth-child(4) {
+    top: 12%;
+    right: 25%;
+}
+
+.background-decoration span:nth-child(5) {
+    bottom: 20%;
+    right: 15%;
+}
+
+.background-decoration span:nth-child(6) {
+    top: 55%;
+    left: 5%;
+}
+
+@keyframes decorationFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+/* =========================
+   6. ẢNH POLAROID BAY LÊN
+========================= */
+
+.photo-burst {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    z-index: 8;
+    pointer-events: none;
+}
+
+.memory-photo {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 125px;
+    height: 160px;
+
+    padding: 8px 8px 25px;
+
+    background: #fffdf8;
+    border-radius: 4px;
+
+    box-shadow: 0 8px 25px rgba(80, 40, 50, 0.2);
+
+    opacity: 0;
+
+    transform: translate(-50%, -50%) scale(0.3);
+
+    animation:
+        photoFly 1.4s ease-out forwards,
+        photoFloat 3s ease-in-out infinite;
+
+    animation-delay:
+        var(--delay),
+        calc(var(--delay) + 1.4s);
+}
+
+.memory-photo img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    display: block;
+
+    border-radius: 2px;
+}
+
+/* Ảnh bay ra xung quanh */
+
+@keyframes photoFly {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3);
+    }
+
+    60% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translate(
+                calc(-50% + var(--x)),
+                calc(-50% + var(--y))
+            )
+            rotate(var(--rotation))
+            scale(1);
+    }
+}
+
+/* Ảnh chuyển động nhẹ */
+
+@keyframes photoFloat {
+    0%, 100% {
+        margin-top: 0;
+    }
+
+    50% {
+        margin-top: -8px;
+    }
+}
+
+/* =========================
+   7. TRÁI TIM BAY LÊN
+========================= */
+
+.floating-heart {
+    position: fixed;
+    bottom: -30px;
+
+    color: #e88fa5;
+    font-size: 22px;
+
+    pointer-events: none;
+    z-index: 20;
+
+    animation: heartFly 5s linear forwards;
+}
+
+@keyframes heartFly {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-110vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* =========================
+   8. ĐIỆN THOẠI
+========================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        padding-top: 55px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .description {
+        margin-bottom: 50px;
+    }
+
+    .envelope-wrapper {
+        width: 260px;
+        height: 185px;
+    }
+
+    .letter {
+        height: 160px;
+        padding: 12px;
+    }
+
+    .envelope.open .letter {
+        transform: translateY(-125px);
+    }
+
+    .memory-photo {
+        width: 90px;
+        height: 120px;
+        padding: 6px 6px 20px;
+    }
+
+    #openButton {
+        margin-top: 40px;
+    }
+}
+.letter-box {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 30px;
+  max-width: 500px;
+  margin: 0 auto;
+  /* Đổ bóng nhiều lớp: Lớp mờ rải đều và lớp đậm ở góc dưới */
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.05),
+    0 8px 16px rgba(0, 0, 0, 0.05),
+    0 16px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 192, 203, 0.3);
+}
+.polaroid::after {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  width: 80px;
+  height: 25px;
+  background: rgba(255, 182, 193, 0.6); /* Băng keo màu hồng nhạt mờ */
+  box-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  backdrop-filter: blur(2px); /* Tạo hiệu ứng kính mờ (nếu muốn) */
+  z-index: 2;
+}

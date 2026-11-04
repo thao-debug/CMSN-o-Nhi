@@ -527,3 +527,254 @@ h1 span {
   backdrop-filter: blur(2px); /* Tạo hiệu ứng kính mờ (nếu muốn) */
   z-index: 2;
 }
+/* Hiệu ứng trái tim bay liên tục */
+#hearts-container {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 100;
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -40px;
+    color: #ff6b9d;
+    font-size: 20px;
+    animation: heartRise 6s linear forwards;
+    opacity: 0;
+    filter: drop-shadow(0 2px 5px rgba(255, 100, 150, 0.3));
+}
+
+@keyframes heartRise {
+    0% {
+        transform: translateY(0) rotate(0deg) scale(0.6);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 0.9;
+    }
+
+    80% {
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: translateY(-110vh) rotate(360deg) scale(1.3);
+        opacity: 0;
+    }
+}
+/* Khu vực hộp quà */
+.container {
+    position: relative;
+}
+
+.gift-decorations {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 15;
+}
+
+/* Hình dáng hộp quà */
+.gift-box {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    pointer-events: auto;
+    animation: giftFloat 3s ease-in-out infinite;
+    transition: filter 0.3s;
+}
+
+.gift-box:hover {
+    filter: brightness(1.15);
+    z-index: 20;
+}
+
+.gift-body {
+    position: absolute;
+    width: 55px;
+    height: 42px;
+    bottom: 0;
+    left: 5px;
+    border-radius: 5px;
+    background: #f5a6bd;
+    box-shadow: 0 5px 10px rgba(150, 80, 110, 0.2);
+}
+
+.gift-lid {
+    position: absolute;
+    width: 65px;
+    height: 13px;
+    left: 0;
+    bottom: 37px;
+    border-radius: 4px;
+    background: #e982a4;
+    z-index: 2;
+}
+
+.gift-ribbon {
+    position: absolute;
+    width: 9px;
+    height: 42px;
+    left: 23px;
+    background: #fff0f4;
+}
+
+.gift-bow {
+    position: absolute;
+    z-index: 3;
+    top: -13px;
+    left: 20px;
+    font-size: 23px;
+}
+
+/* Màu sắc từng hộp */
+.gift-1 .gift-body { background: #f5a6bd; }
+.gift-1 .gift-lid { background: #e982a4; }
+
+.gift-2 .gift-body { background: #b9a1dc; }
+.gift-2 .gift-lid { background: #9878c5; }
+
+.gift-3 .gift-body { background: #f5d69b; }
+.gift-3 .gift-lid { background: #e6b96e; }
+
+.gift-4 .gift-body { background: #a8d8c5; }
+.gift-4 .gift-lid { background: #73b99e; }
+
+.gift-5 .gift-body { background: #f2a0a0; }
+.gift-5 .gift-lid { background: #dc777f; }
+
+.gift-6 .gift-body { background: #f1c4dc; }
+.gift-6 .gift-lid { background: #d991ba; }
+
+/* Vị trí rải rác xung quanh thiệp */
+.gift-1 {
+    top: 8%;
+    left: 5%;
+    rotate: -12deg;
+}
+
+.gift-2 {
+    top: 23%;
+    right: 7%;
+    rotate: 12deg;
+    animation-delay: 0.6s;
+}
+
+.gift-3 {
+    top: 55%;
+    left: 2%;
+    rotate: 8deg;
+    animation-delay: 1s;
+}
+
+.gift-4 {
+    top: 62%;
+    right: 3%;
+    rotate: -10deg;
+    animation-delay: 0.3s;
+}
+
+.gift-5 {
+    bottom: 4%;
+    left: 23%;
+    rotate: 14deg;
+    animation-delay: 1.3s;
+}
+
+.gift-6 {
+    bottom: 5%;
+    right: 22%;
+    rotate: -14deg;
+    animation-delay: 0.8s;
+}
+
+/* Hiệu ứng bay nhẹ */
+@keyframes giftFloat {
+    0%, 100% {
+        translate: 0 0;
+    }
+
+    50% {
+        translate: 0 -13px;
+    }
+}
+
+/* Khung lời chúc */
+.wish-message {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(320px, 85vw);
+    padding: 30px 25px;
+    background: #fff7fa;
+    border: 2px solid #f4c1d2;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(150, 80, 110, 0.25);
+    text-align: center;
+    z-index: 200;
+}
+
+.wish-message.show {
+    display: block;
+    animation: wishAppear 0.4s ease;
+}
+
+.wish-icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+}
+
+#wishText {
+    color: #a64d70;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+.close-wish {
+    position: absolute;
+    top: 8px;
+    right: 13px;
+    border: none;
+    background: transparent;
+    color: #b76b89;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+@keyframes wishAppear {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -45%) scale(0.8);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+/* Điều chỉnh trên điện thoại */
+@media (max-width: 600px) {
+    .gift-box {
+        scale: 0.72;
+    }
+
+    .gift-1 { top: 4%; left: -2%; }
+    .gift-2 { top: 22%; right: -3%; }
+    .gift-3 { top: 57%; left: -4%; }
+    .gift-4 { top: 60%; right: -4%; }
+    .gift-5 { bottom: 1%; left: 12%; }
+    .gift-6 { bottom: 1%; right: 12%; }
+}

@@ -145,9 +145,9 @@ function showPhotos() {
 // 5. HIỆU ỨNG TRÁI TIM
 // =========================
 
-function createHearts() {
+function createHearts(count = 15) {
 
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < count; i++) {
 
         const heart = document.createElement("span");
 
@@ -167,8 +167,89 @@ function createHearts() {
 
             heart.remove();
 
-        }, 5500);
+        }, 7000);
 
     }
 
 }
+
+createHearts();
+
+window.setInterval(function () {
+
+    createHearts(2);
+
+}, 900);
+// Tạo trái tim bay khi truy cập website
+function createFlyingHeart() {
+    const heart = document.createElement("span");
+
+    heart.className = "floating-heart";
+    heart.innerHTML = "♥";
+
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (14 + Math.random() * 22) + "px";
+    heart.style.animationDuration = (5 + Math.random() * 4) + "s";
+
+    document.querySelector("#hearts-container").appendChild(heart);
+
+    setTimeout(function () {
+        heart.remove();
+    }, 10000);
+}
+
+// Bắt đầu tạo trái tim ngay khi mở trang
+setInterval(createFlyingHeart, 400);
+// Nội dung lời chúc của từng hộp quà
+const giftWishes = [
+    "Chúc bạn luôn xinh đẹp, vui vẻ và gặp thật nhiều may mắn nhé! 💗",
+
+    "Mong mỗi ngày của bạn đều ngập tràn tiếng cười và những điều ngọt ngào. 🌷",
+
+    "Chúc bạn luôn tự tin, mạnh mẽ và đạt được tất cả những ước mơ của mình. ✨",
+
+    "Mong bạn luôn được yêu thương, trân trọng và hạnh phúc. 💕",
+
+    "Hy vọng những điều tốt đẹp nhất sẽ luôn tìm đến bạn. Hãy mỉm cười thật nhiều nhé! 🌸",
+
+    "Một món quà nhỏ thay cho lời nhắn: Bạn xứng đáng với tất cả những điều tuyệt vời nhất! 🎁"
+];
+
+// Lấy các thành phần hộp quà
+const giftBoxes = document.querySelectorAll(".gift-box");
+const wishMessage = document.querySelector("#wishMessage");
+const wishText = document.querySelector("#wishText");
+const closeWish = document.querySelector("#closeWish");
+
+// Khi nhấn vào hộp quà
+giftBoxes.forEach(function(gift) {
+
+    gift.addEventListener("click", function() {
+
+        const index = Number(gift.dataset.wish);
+
+        wishText.textContent = giftWishes[index];
+
+        wishMessage.classList.add("show");
+
+    });
+
+});
+
+// Đóng lời chúc
+closeWish.addEventListener("click", function() {
+    wishMessage.classList.remove("show");
+});
+
+// Nhấn bên ngoài để đóng lời chúc
+document.addEventListener("click", function(event) {
+
+    if (
+        wishMessage.classList.contains("show") &&
+        !wishMessage.contains(event.target) &&
+        !event.target.closest(".gift-box")
+    ) {
+        wishMessage.classList.remove("show");
+    }
+
+});

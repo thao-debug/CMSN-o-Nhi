@@ -202,17 +202,17 @@ function createFlyingHeart() {
 setInterval(createFlyingHeart, 400);
 // Nội dung lời chúc của từng hộp quà
 const giftWishes = [
-    "Chúc bạn luôn xinh đẹp, vui vẻ và gặp thật nhiều may mắn nhé! 💗",
+    "Hãy luôn cười mỗi ngày nhéee! 💗",
 
-    "Mong mỗi ngày của bạn đều ngập tràn tiếng cười và những điều ngọt ngào. 🌷",
+    "Wishing you the happiest of birthdays,dear O Nhi May all your dreams and wishes come true! 🌷",
 
-    "Chúc bạn luôn tự tin, mạnh mẽ và đạt được tất cả những ước mơ của mình. ✨",
+    "Chúc Nhi luôn tự tin, mạnh mẽ và đạt được tất cả những ước mơ của mình. ✨",
 
-    "Mong bạn luôn được yêu thương, trân trọng và hạnh phúc. 💕",
+    "Mong Nhi luôn được yêu thương, trân trọng và hạnh phúc. 💕",
 
-    "Hy vọng những điều tốt đẹp nhất sẽ luôn tìm đến bạn. Hãy mỉm cười thật nhiều nhé! 🌸",
+    "Wishing you a wonderful birthday filled with love and laughter. 🎉",
 
-    "Một món quà nhỏ thay cho lời nhắn: Bạn xứng đáng với tất cả những điều tuyệt vời nhất! 🎁"
+    "Một món quà nhỏ thay cho lời nhắn: Nhi xứng đáng với tất cả những điều tuyệt vời nhất! 🎁"
 ];
 
 // Lấy các thành phần hộp quà
